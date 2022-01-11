@@ -30,6 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  web:
+    main:
+      header: 'Online Booking'
+      seats: 'Seats: %{quantity}'
+      register_text: 'Register'
+      step0_submit: 'Next'
   admin:
     users:
       notices:
@@ -53,5 +59,6 @@ en:
           header: 'VaccinesItems'
           name: 'Name'
           active: 'Active'
+          description: 'Description'
           created_at: 'CreatedAt'
           updated_at: 'UpdatedAt'

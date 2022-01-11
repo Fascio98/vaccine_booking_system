@@ -1,0 +1,20 @@
+<h1>Registration</h1>
+
+<div class="row">
+  <div class="col">
+    <div class="card h-100">
+      <h5 class="card-title"><strong><%= @current_vaccine.name %></strong></h5>
+      <br />
+      <%= simple_form_for @record, method: :post, url: next_step_path do|f| %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :birth_date %>
+        <%= f.input :pin %>
+        <%= f.input :non_resident %>
+        <%= f.input :mobile_phone %>
+        <%= f.input :email %>
+        <%= f.submit I18n.t('web.main.step0_submit'), class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>
