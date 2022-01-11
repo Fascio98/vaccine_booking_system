@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     root to: "main#index"
     resources :users
     resources :vaccines_items
+    resources :bookings
     #resources :main, only: %i[index]
   end
 

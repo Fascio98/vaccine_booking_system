@@ -57,8 +57,33 @@ en:
         destroyed: 'VaccineItem was successfully destroyed'
         list:
           header: 'VaccinesItems'
-          name: 'Name'
+          name: 'Vaccine Name'
           active: 'Active'
           description: 'Description'
           created_at: 'CreatedAt'
           updated_at: 'UpdatedAt'
+    bookings:
+      notices:
+        created: 'Booking was successfully created.'
+        destroyed: 'Booking was successfully destroyed'
+        list:
+          header: 'Bookings'
+          guid: 'Guid'
+          step_state: 'Step State'
+          created_at: 'CreatedAt'
+          updated_at: 'UpdatedAt'
+    patients:
+      notices:
+        created: 'Patient was successfully created.'
+        destroyed: 'Patient was successfully destroyed'
+        list:
+          first_name: 'First Name'
+          last_name: 'Last Name'
+          pin: 'PIN'
+          birth_date: 'Birth Date'
+          non_resident: 'Non Resident'
+          mobile_phone: 'Mobile Phone'
+          email: 'E-Mail'
+          created_at: 'CreatedAt'
+          updated_at: 'UpdatedAt'
+
