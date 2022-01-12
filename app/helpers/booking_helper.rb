@@ -1,9 +1,13 @@
 module BookingHelper
   def vaccine_name(vaccine_item)
-    VaccinesItem.find(vaccine_item).name
+    if VaccinesItem.exists?(vaccine_item)
+      VaccinesItem.find(vaccine_item).name
+    end
   end
 
   def patient_pin(booking)
-    Patient.find(booking).pin
+    if Patient.exists?(booking)
+      Patient&.find(booking).pin
+    end
   end
 end

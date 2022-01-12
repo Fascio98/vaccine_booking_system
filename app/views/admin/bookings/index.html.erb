@@ -20,9 +20,9 @@
           <tbody>
           <% @bookings.each do |booking| %>
             <tr>
-              <td class="align-middle"><%= vaccine_name(booking.vaccine_id) %></td>
+              <td class="align-middle"><%= vaccine_name(booking&.vaccine_id) %></td>
               <td class="align-middle"><%= booking.guid %></td>
-              <td class="align-middle"><%= patient_pin(booking.patient_id) %></td>
+              <td class="align-middle"><%= patient_pin(booking&.patient_id) %></td>
               <td class="align-middle"><%= booking.step_state %></td>
               <td class="align-middle"><%= booking.created_at %></td>
               <td class="align-middle"><%= booking.ip_address  %></td>
