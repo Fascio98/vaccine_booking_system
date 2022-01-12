@@ -1,3 +1,5 @@
+require "browser"
+
 class MainController < ApplicationController
   before_action :fetch_booking, only: %i[current_step next_step]
   def index
@@ -9,9 +11,13 @@ class MainController < ApplicationController
 
     return redirect_to root_url unless @current_vaccine
 
+
+    @browser = Browser.new(request.env["HTTP_USER_AGENT"])
+    @ip_address = request.remote_ip
     case
     when @booking && @booking.vaccine.name != @current_vaccine.name
-      web_step=Web::Step0Service.new(@current_vaccine)
+
+      web_step=Web::Step0Service.new(@current_vaccine,@browser,@ip_address)
       web_step.call(nil)
 
       @booking ||= web_step.booking
@@ -20,14 +26,14 @@ class MainController < ApplicationController
       cookies.signed[:booking_uuid] = {value: @booking.guid, expires: 30.minutes.from_now}
       render :step0
     when @booking&.pending?
-      web_step=Web::Step0Service.new(@current_vaccine)
+      web_step=Web::Step0Service.new(@current_vaccine,@browser,@ip_address)
       web_step.call(@booking)
 
       @current_vaccine, @record = web_step.current_vaccine, web_step.record
 
       render :step0
     when @booking.nil?
-      web_step=Web::Step0Service.new(@current_vaccine)
+      web_step=Web::Step0Service.new(@current_vaccine,@browser,@ip_address)
       web_step.call(@booking)
 
       @booking ||= web_step.booking

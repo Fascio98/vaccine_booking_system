@@ -69,6 +69,9 @@ en:
         list:
           header: 'Bookings'
           guid: 'Guid'
+          ip_address: 'Ip Address'
+          browser_name: 'Browser Name'
+          os_name: 'OS Name'
           step_state: 'Step State'
           created_at: 'CreatedAt'
           updated_at: 'UpdatedAt'

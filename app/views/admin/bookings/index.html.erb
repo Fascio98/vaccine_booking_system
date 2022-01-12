@@ -11,6 +11,9 @@
             <th><%= I18n.t('admin.patients.notices.list.pin') %></th>
             <th><%= I18n.t('admin.bookings.notices.list.step_state') %></th>
             <th><%= I18n.t('admin.bookings.notices.list.created_at') %></th>
+            <th><%= I18n.t('admin.bookings.notices.list.ip_address') %></th>
+            <th><%= I18n.t('admin.bookings.notices.list.browser_name') %></th>
+            <th><%= I18n.t('admin.bookings.notices.list.os_name') %></th>
           </tr>
           </thead>
 
@@ -22,6 +25,10 @@
               <td class="align-middle"><%= patient_pin(booking.patient_id) %></td>
               <td class="align-middle"><%= booking.step_state %></td>
               <td class="align-middle"><%= booking.created_at %></td>
+              <td class="align-middle"><%= booking.ip_address  %></td>
+              <td class="align-middle"><%= booking.browser_name %></td>
+              <td class="align-middle"><%= booking.os_name %></td>
+
             </tr>
           <% end %>
           </tbody>
