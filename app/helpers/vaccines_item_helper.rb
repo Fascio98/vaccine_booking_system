@@ -1,5 +1,5 @@
 module VaccinesItemHelper
-  def vaccine_name_downcase(vaccines_item)
-    vaccines_item.name.downcase
+  def downcase(vaccines_item)
+    vaccines_item.downcase
   end
 end

@@ -7,7 +7,7 @@ class MainController < ApplicationController
   end
 
   def current_step
-    @current_vaccine=VaccinesItem.active.where("lower(name) = ?", params[:vaccine]&.downcase).first
+    @current_vaccine=VaccinesItem.active.where("lower(name) = ?", helpers.downcase(params[:vaccine])).first
 
     return redirect_to root_url unless @current_vaccine
 
