@@ -78,6 +78,7 @@ en:
     patients:
       notices:
         created: 'Patient was successfully created.'
+        updated: 'Patient was successfully updated'
         destroyed: 'Patient was successfully destroyed'
         list:
           first_name: 'First Name'

@@ -6,11 +6,13 @@ Rails.application.routes.draw do
     resources :users
     resources :vaccines_items
     resources :bookings
+    resources :patients
+    get 'patients/:id', to: 'patients#show', as: 'show'
     #resources :main, only: %i[index]
   end
 
   root to: "main#index"
 
-  match 'booking/:vaccine', to: 'main#current_step', via: :get, as: :new_booking
+  match 'booking/:vaccine', to: 'main#current_step', via: :get, as: :current_step
   match 'next_step', to: 'main#next_step', via: :post
 end
