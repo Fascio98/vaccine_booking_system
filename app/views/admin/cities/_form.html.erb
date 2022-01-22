@@ -1,0 +1,15 @@
+<% if city.errors[:base].present? %>
+  <% city.errors.each do |error| %>
+    <div class="alert alert-danger" role="alert">
+      <%= error.full_message %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= simple_form_for [:admin,city] do |f| %>
+  <%= f.association :country %>
+  <%= f.input :name %>
+  <%= f.input :code %>
+  <%= f.input :active %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

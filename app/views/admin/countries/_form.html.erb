@@ -1,0 +1,14 @@
+<% if country.errors[:base].present? %>
+  <% country.errors.each do |error| %>
+    <div class="alert alert-danger" role="alert">
+      <%= error.full_message %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= simple_form_for [:admin,country] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :code %>
+  <%= f.input :active %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

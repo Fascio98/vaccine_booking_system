@@ -48,8 +48,8 @@ en:
         email: 'Email'
         active: 'Active'
         super_admin: 'SuperAdmin'
-        created_at: 'CreatedAt'
-        updated_at: 'UpdatedAt'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
     vaccinesitems:
       notices:
         created: 'VaccineItem was successfully created.'
@@ -60,8 +60,8 @@ en:
           name: 'Vaccine Name'
           active: 'Active'
           description: 'Description'
-          created_at: 'CreatedAt'
-          updated_at: 'UpdatedAt'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
     bookings:
       notices:
         created: 'Booking was successfully created.'
@@ -73,14 +73,15 @@ en:
           browser_name: 'Browser Name'
           os_name: 'OS Name'
           step_state: 'Step State'
-          created_at: 'CreatedAt'
-          updated_at: 'UpdatedAt'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
     patients:
       notices:
         created: 'Patient was successfully created.'
         updated: 'Patient was successfully updated'
         destroyed: 'Patient was successfully destroyed'
         list:
+          header: 'Patients'
           first_name: 'First Name'
           last_name: 'Last Name'
           pin: 'PIN'
@@ -88,6 +89,76 @@ en:
           non_resident: 'Non Resident'
           mobile_phone: 'Mobile Phone'
           email: 'E-Mail'
-          created_at: 'CreatedAt'
-          updated_at: 'UpdatedAt'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
+    slots:
+      notices:
+        created: 'Slot Was Successfully Created'
+        updated: 'Slot Was Successfully Updated'
+        destroyed: 'Slot Was Successfully Updated'
+        list:
+          header: 'Business Units'
+          business_unit_name: 'Business Unit Name'
+          duration: 'Duration'
+          start_date: 'Start Date'
+          end_date: 'End Date'
+          active: 'Active'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
+        errors:
+          duplicate_slot_error: 'Duplicate Or Incorrect Start-End Date Slot'
+    countries:
+      notices:
+        created: 'Country Was Successfully Created'
+        updated: 'Country Was Successfully Updated'
+        destroyed: 'Country Was Successfully Updated'
+        list:
+          header: 'Countries'
+          name: 'Name'
+          code: 'Code'
+          active: 'Active'
+        errors:
+          duplicate_key_error: 'Country With The Same Code Already Exists'
+    cities:
+      notices:
+        created: 'City Was Successfully Created'
+        updated: 'City Was Successfully Updated'
+        destroyed: 'City Was Successfully Updated'
+        list:
+          header: 'Cities'
+          country: 'Country'
+          name: 'Name'
+          code: 'Code'
+          active: 'Active'
+        errors:
+          duplicate_key_error: 'City With The Same Code Already Exists'
+    districts:
+      notices:
+        created: 'District Was Successfully Created'
+        updated: 'District Was Successfully Updated'
+        destroyed: 'District Was Successfully Updated'
+        list:
+          header: 'Districts'
+          city: 'City'
+          name: 'Name'
+          code: 'Code'
+          active: 'Active'
+        errors:
+          duplicate_key_error: 'District With The Same Code Already Exists'
+    business_units:
+      notices:
+        created: 'District Was Successfully Created'
+        updated: 'District Was Successfully Updated'
+        destroyed: 'District Was Successfully Updated'
+        list:
+          header: 'Business Units'
+          country: 'Country'
+          city: 'City'
+          district: 'District'
+          name: 'Name'
+          code: 'Code'
+          active: 'Active'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
+
 

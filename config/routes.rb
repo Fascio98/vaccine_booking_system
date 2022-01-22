@@ -7,7 +7,16 @@ Rails.application.routes.draw do
     resources :vaccines_items
     resources :bookings
     resources :patients
-    get 'patients/:id', to: 'patients#show', as: 'show'
+    resources :business_unit_slots
+
+    get 'business_units/fetch_cities'
+    get 'business_units/fetch_districts'
+
+    resources :countries
+    resources :cities
+    resources :districts
+    resources :business_units
+
     #resources :main, only: %i[index]
   end
 
