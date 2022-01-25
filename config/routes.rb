@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     resources :bookings
     resources :patients
     resources :business_unit_slots
-
     get 'business_units/fetch_cities'
     get 'business_units/fetch_districts'
 
@@ -21,6 +20,11 @@ Rails.application.routes.draw do
   end
 
   root to: "main#index"
+
+  get 'slots/fetch_cities'
+  get 'slots/fetch_districts'
+  get 'slots/fetch_business_units'
+  resources :slots, only: :index
 
   match 'booking/:vaccine', to: 'main#current_step', via: :get, as: :current_step
   match 'next_step', to: 'main#next_step', via: :post
