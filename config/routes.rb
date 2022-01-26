@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :cities
     resources :districts
     resources :business_units
+    resources :orders
 
     #resources :main, only: %i[index]
   end

@@ -33,13 +33,22 @@
     </div>
 
     <div class="col">
-      <%= f.collection_select :country_id, Country.active, :id, :name,
+      <%= f.collection_select :business_unit_id, [], :id, :name,
                               {include_blank: 'Select Business Unit'},
                               class: 'form-select',
                               data: {
                                 action: "change->slots#fetchSlots",
                                 slots_target: "bu_unit"
                               }%>
+    </div>
+
+    <div class="col">
+      <%= f.button "Do It" ,type: 'button', class: 'btn btn-success',
+                     data: {
+                       action: "click->slots#fetchSlots",
+                       slots_target: "refresh"
+                     }, disabled: true %>
+
     </div>
 
     <div class="row" data-slots-target="slots"></div>

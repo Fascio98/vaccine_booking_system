@@ -160,5 +160,15 @@ en:
           active: 'Active'
           created_at: 'Created At'
           updated_at: 'Updated At'
-
+    orders:
+      notices:
+        list:
+          business_unit: 'Business Unit'
+          patient_first_name: 'Patient First Name'
+          patient_last_name: 'Patient Last Name'
+          order_code: 'Order Code'
+          order_date: 'Order Date'
+          finished: 'Finished'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
 
