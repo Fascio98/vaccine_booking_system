@@ -1,0 +1,2 @@
+class AddDefaultFalseToOrdersFinished < ApplicationRecord
+end
