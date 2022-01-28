@@ -177,6 +177,7 @@ en:
           updated_at: 'Updated At'
     orders:
       notices:
+        header: 'Orders'
         list:
           business_unit: 'Business Unit'
           patient_first_name: 'Patient First Name'
@@ -186,4 +187,14 @@ en:
           finished: 'Finished'
           created_at: 'Created At'
           updated_at: 'Updated At'
+    order_sms_messages:
+      header: 'Sms Messages'
+      list:
+        vaccine: 'Vaccine'
+        code: 'Code'
+        title: 'Title'
+        message: 'Message'
+        sent_at: 'Sent At'
+        created_at: 'Created At'
+        updated_at: 'Updated At'
 

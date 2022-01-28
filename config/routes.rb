@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :districts
     resources :business_units
     resources :orders
-
+    resources :order_sms_messages
     #resources :main, only: %i[index]
   end
 
