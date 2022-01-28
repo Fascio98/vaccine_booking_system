@@ -190,7 +190,7 @@ en:
     order_sms_messages:
       header: 'Sms Messages'
       list:
-        vaccine: 'Vaccine'
+        patient_mobile_phone: 'Patient Mobile Phone'
         code: 'Code'
         title: 'Title'
         message: 'Message'

@@ -12,26 +12,24 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th><%= I18n.t('admin.order_sms_messages.list.vaccine') %></th>
-            <th><%= I18n.t('admin.order_sms_messages.list.code') %></th>
             <th><%= I18n.t('admin.order_sms_messages.list.title') %></th>
             <th><%= I18n.t('admin.order_sms_messages.list.message') %></th>
+            <th><%= I18n.t('admin.order_sms_messages.list.patient_mobile_phone') %></th>
+            <th><%= I18n.t('admin.order_sms_messages.list.code') %></th>
             <th><%= I18n.t('admin.order_sms_messages.list.sent_at') %></th>
             <th><%= I18n.t('admin.order_sms_messages.list.created_at') %></th>
-            <th><%= I18n.t('admin.order_sms_messages.list.updated_at') %></th>
           </tr>
           </thead>
 
           <tbody>
           <% @sms_messages.each do |sms_message| %>
             <tr>
-              <td class="align-middle"><%= sms_message.booking.vaccine.name %></td>
-              <td class="align-middle"><%= sms_message.code %></td>
               <td class="align-middle"><%= sms_message.title %></td>
               <td class="align-middle"><%= sms_message.message %></td>
+              <td class="align-middle"><%= sms_message.booking.patient.mobile_phone %></td>
+              <td class="align-middle"><%= sms_message.code %></td>
               <td class="align-middle"><%= sms_message.sent_at %></td>
               <td class="align-middle"><%= sms_message.created_at %></td>
-              <td class="align-middle"><%= sms_message.updated_at %></td>
             </tr>
           <% end %>
           </tbody>
