@@ -54,7 +54,7 @@ module Admin
 
     def slot_params
       params.require(:business_unit_slot).
-        permit(:id, :duration, :business_unit_id, :start_date, :end_date, :active)
+        permit(:id, :duration, :business_unit_id, :start_date, :end_date, :active, :user_id)
     end
 
   end

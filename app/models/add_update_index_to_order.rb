@@ -1,0 +1,2 @@
+class AddUpdateIndexToOrder < ApplicationRecord
+end

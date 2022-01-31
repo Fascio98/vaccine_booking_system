@@ -1,11 +1,19 @@
 require "browser"
 
 class MainController < ApplicationController
-  before_action :fetch_booking, only: %i[current_step next_step]
+  before_action :fetch_booking, only: %i[current_step next_step prev_step]
   before_action :clear_booking
 
   def index
     @vaccine_items = VaccinesItem.active
+
+    @bu_unit1 = BusinessUnitSlot.active
+    @slots1 = BusinessUnitSlot
+              .select('bus.id, bus.duration, bus.start_date::date AS current_start_date, slots.item AS slot_item')
+              .from(@bu_unit1.active, 'bus')
+              .joins("LEFT JOIN LATERAL (Select generate_series(bus.start_date, bus.end_date, bus.duration * '1 minutes'::interval)::timestamp AS item) slots ON true")
+              .joins('LEFT JOIN orders o ON o.business_unit_slot_id = bus.id AND o.finished = true and o.order_date::timestamp = slots.item')
+              .where('o.id IS NULL')
   end
 
   def browser
@@ -40,29 +48,44 @@ class MainController < ApplicationController
   def next_step
     return redirect_to root_url, notice: I18n.t('web.main.session_expired') unless @booking
 
-
     result = Web::NextStepService.call(booking: @booking, params: params)
 
     if result.success?
       if result.last_step?
         cookies.delete(:booking_uuid)
+
         return redirect_to root_url, notice: I18n.t('web.main.booking_success')
       end
-      redirect_to current_step_path(result.booking.vaccine&.name)
+
+      redirect_to current_step_path(result.booking.vaccine&.name&.downcase)
     else
-      assign_step_variables({vaccine: result.current_vaccine,record: result.record})
+      assign_step_variables({ vaccine: result.booking.vaccine, record: result.record })
 
       render "main/steps/step#{result.current_step}"
     end
   end
 
   def prev_step
+    return redirect_to root_url, notice: I18n.t('web.main.session_expired') unless @booking
 
+    result = Web::PrevStepService.call(booking: @booking, params: params)
+
+    if result.success?
+      if result.first_step?
+        cookies.delete(:booking_uuid)
+
+        return redirect_to root_url
+      end
+
+      redirect_to current_step_path(result.booking.vaccine&.name&.downcase)
+    else
+      assign_step_variables({ vaccine: result.booking.vaccine, record: result.record })
+
+      render "main/steps/step#{result.current_step}"
+    end
   end
 
-  def register
-
-  end
+  private
 
   def fetch_booking
     booking_uuid = cookies.signed[:booking_uuid]
@@ -71,14 +94,12 @@ class MainController < ApplicationController
     if booking_uuid.present?
       @booking = Booking.find_by(guid: booking_uuid)
     end
-
-    def assign_step_variables(attrs)
-      @current_vaccine = attrs[:vaccine]
-      @record = attrs[:record]
-    end
-
   end
 
+  def assign_step_variables(attrs)
+    @current_vaccine = attrs[:vaccine]
+    @record = attrs[:record]
+  end
 
   def clear_booking
     if @booking&.finished?
