@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: vaccine_booking_system_production
-  username: vaccine_booking_system
-  password: <%= ENV['VACCINE_BOOKING_SYSTEM_DATABASE_PASSWORD'] %>
+  host: <%= ENV.fetch("DB_HOST") { 'localhost'} %>
+  database: vaccine_production
+  username: <%= ENV.fetch("DB_USER") { 'postgres'} %>
+  password: <%= ENV.fetch("DB_PASSWORD") { ''} %>
