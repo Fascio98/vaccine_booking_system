@@ -7,13 +7,10 @@ class MainController < ApplicationController
   def index
     @vaccine_items = VaccinesItem.active
 
-    @bu_unit1 = BusinessUnitSlot.active
-    @slots1 = BusinessUnitSlot
-              .select('bus.id, bus.duration, bus.start_date::date AS current_start_date, slots.item AS slot_item')
-              .from(@bu_unit1.active, 'bus')
-              .joins("LEFT JOIN LATERAL (Select generate_series(bus.start_date, bus.end_date, bus.duration * '1 minutes'::interval)::timestamp AS item) slots ON true")
-              .joins('LEFT JOIN orders o ON o.business_unit_slot_id = bus.id AND o.finished = true and o.order_date::timestamp = slots.item')
-              .where('o.id IS NULL')
+    @bu_unit = BusinessUnitSlot.active
+
+    @slot_service = Slots::SlotService.new(current_user)
+    @slots = @slot_service.sql(@bu_unit)
   end
 
   def browser
