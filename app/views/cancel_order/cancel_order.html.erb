@@ -1,0 +1,54 @@
+<% if @that_order.nil? || @that_patient.nil? %>
+  <div class="alert alert-danger" role="alert">
+    <%= @record %>
+  </div>
+<% end %>
+
+<div class="card">
+  <div class="card-body">
+    <h1>Cancel Order</h1>
+    <%= form_tag cancel_order_path, :method => "get" do %>
+      <div class="row">
+        <%= label_tag(:order_code) %>
+        <div class="col-1">
+          <%= text_field_tag :search_order, params[:search_order], presence: true%>
+        </div>
+
+      </div>
+      <% if @that_order.nil? %>
+        <%= flash[:notice] = 'Field Required' %>
+
+      <% end %>
+
+      <div class="row">
+        <%= label_tag(:phone_number) %>
+        <div class="col-1">
+          <%= text_field_tag :search_patient, params[:search_patient], presence: true %>
+        </div>
+
+      </div>
+      <% if @that_patient.nil? %>
+        <%= flash[:notice] = 'Field Required' %>
+      <% end %>
+      <%= submit_tag "Search", :name => nil, class:'btn btn-primary' %>
+    <% end %>
+
+    <% if @that_business_unit.present? %>
+      <%= @that_business_unit.name %>
+      <%= @that_business_unit.country.name %>
+      <%= @that_business_unit.city.name %>
+      <%= @that_business_unit.district.name %>
+      <%= @that_order.order_date %>
+    <% end %>
+
+    <div class="card-footer">
+      <small class="text-muted">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;)" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><%= link_to 'Home', root_url %></li>
+          </ol>
+        </nav>
+      </small>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ class Booking < ApplicationRecord
 
   aasm :column => 'step_state', whiny_persistence: true do
     state :pending, initial: true
-    state :patient_upserted, :reserved, :finished
+    state :patient_upserted, :reserved, :finished, :order_delete
 
     event :upsert_patient do
       transitions from: :pending, to: :patient_upserted
@@ -23,6 +23,14 @@ class Booking < ApplicationRecord
 
     event :finish do
       transitions from: :reserved, to: :finished
+    end
+
+    event :order_delete do
+      transitions from: :pending, to: :order_deleted
+    end
+
+    event :deletion_finish do
+      transitions from: :order_deleted, to: :deletion_finished
     end
   end
 
