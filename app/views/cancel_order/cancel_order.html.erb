@@ -32,23 +32,50 @@
       <% end %>
       <%= submit_tag "Search", :name => nil, class:'btn btn-primary' %>
     <% end %>
+  </div>
+</div>
 
-    <% if @that_business_unit.present? %>
-      <%= @that_business_unit.name %>
-      <%= @that_business_unit.country.name %>
-      <%= @that_business_unit.city.name %>
-      <%= @that_business_unit.district.name %>
-      <%= @that_order.order_date %>
-    <% end %>
+<div class="card">
+  <div class="card_body">
+    <div class="row">
+      <div class="col">
+        <% if @that_business_unit.present? %>
+          <h1>Order Details</h1>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th><%= I18n.t('admin.business_units.notices.list.country') %></th>
+              <th><%= I18n.t('admin.business_units.notices.list.city') %></th>
+              <th><%= I18n.t('admin.business_units.notices.list.district') %></th>
+              <th><%= I18n.t('admin.business_units.notices.list.name') %></th>
+              <th><%= I18n.t('admin.orders.notices.list.order_date') %></th>
+            </tr>
+            </thead>
 
-    <div class="card-footer">
-      <small class="text-muted">
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;)" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><%= link_to 'Home', root_url %></li>
-          </ol>
-        </nav>
-      </small>
+            <tbody>
+            <tr>
+              <td class="align-middle"><%= @that_business_unit.name %></td>
+              <td class="align-middle"><%= @that_business_unit.country.name %></td>
+              <td class="align-middle"><%= @that_business_unit.city.name %></td>
+              <td class="align-middle"><%= @that_business_unit.district.name %></td>
+              <td class="align-middle"><%= @that_order.order_date %></td
+            </tr>
+            </tbody>
+          </table>
+        <% end %>
+
+      </div>
+      <%= button_to "Delete Order", root_path, class:'btn btn-primary' %>
     </div>
   </div>
+</div>
+
+<div class="card-footer">
+  <small class="text-muted">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;)" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to 'Home', root_url %></li>
+      </ol>
+    </nav>
+  </small>
 </div>
