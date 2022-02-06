@@ -23,14 +23,14 @@
       <div class="row">
         <%= label_tag(:phone_number) %>
         <div class="col-1">
-          <%= text_field_tag :search_patient, params[:search_patient], presence: true %>
+          <%= text_field_tag :search_patient, params[:search_patient] %>
         </div>
 
       </div>
       <% if @that_patient.nil? %>
         <%= flash[:notice] = 'Field Required' %>
       <% end %>
-      <%= submit_tag "Search", :name => nil, class:'btn btn-primary' %>
+      <%= submit_tag "Search", :name => nil, class:'btn btn-primary'%>
     <% end %>
   </div>
 </div>
@@ -62,10 +62,12 @@
             </tr>
             </tbody>
           </table>
+          <%= button_to 'Delete Order', cancel_order_finalize_path(@that_business_unit), type: "button", class: 'btn btn-outline-dark' %>
+          <%= @result.nil? %>
         <% end %>
 
       </div>
-      <%= button_to "Delete Order", root_path, class:'btn btn-primary' %>
+
     </div>
   </div>
 </div>

@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   match 'prev_step', to: 'main#prev_step', via: :post
 
   match 'cancel_order', to: 'cancel_order#cancel_order', via: :get, as: :cancel_order
+  match 'cancel_order_finalize', to: 'cancel_order#cancel_order_finalize', via: [:post, :get], as: :cancel_order_finalize
 end
