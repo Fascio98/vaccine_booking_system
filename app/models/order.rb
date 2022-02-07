@@ -21,7 +21,7 @@ class Order < ApplicationRecord
         self.where(id: order_code)
       end
     else
-      @that_order=Order.all
+      @that_order= {}
     end
   end
 
