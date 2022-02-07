@@ -4,7 +4,6 @@
   </div>
 <% end %>
 
-
 <div class="card">
   <div class="card-body">
     <h4>You are about to delete your order</h4>
@@ -22,12 +21,8 @@
           <%= text_field_tag :search_sms_message, params[:search_sms_message], presence: true%>
         </div>
       </div>
-      <% if @that_order.nil? %>
-        <%= flash[:notice] = 'Field Required' %>
-      <% end %>
       <%= submit_tag "Cancel Order", :name => nil, class:'btn btn-primary'%>
     <% end %>
-    <%= @that_sms_verify.length %>
   </div>
 </div>
 

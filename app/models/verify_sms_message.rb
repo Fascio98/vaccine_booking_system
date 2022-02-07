@@ -9,7 +9,7 @@ class VerifySmsMessage < ApplicationRecord
         self.where(id: verify_order_message)
       end
     else
-      @that_sms_verify= { }
+      @that_sms_verify= {}
     end
   end
 end

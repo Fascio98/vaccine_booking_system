@@ -2,9 +2,12 @@ class CancelOrderController < ApplicationController
   before_action :init_service
 
   def cancel_order
-    if @that_order.length == 1
+    if @that_order.present?
       if @that_order.last.patient.mobile_phone == @that_patient.mobile_phone
         @that_business_unit = BusinessUnit.find_by(id: @that_order.last.business_unit_slot&.business_unit&.id)
+        @booking = Booking.find_by(order_id: @that_order.last.id)
+        @sms = Web::DeleteOrderSmsService.new(@booking).call
+        SendOrderSmsVerifyWorker.perform_async(@sms.id)
       end
     end
   rescue => e
@@ -12,14 +15,13 @@ class CancelOrderController < ApplicationController
   end
 
   def cancel_order_finalize
-    @booking = Booking.find_by(order_id: @that_order.last.id)
-    @sms = Web::DeleteOrderSmsService.new(@booking).call
-    SendOrderSmsVerifyWorker.perform_async(@sms.id)
+
     @that_sms_verify=VerifySmsMessage.verify_order_message(params[:search_sms_message])
 
-    if @that_sms_verify.length == 1
-      if @booking.id == @that_sms_verify.last.booking.id
-        @that_order.last.update!(finished: false)
+    if @that_sms_verify.present?
+      @booking = Booking.find_by(id: @that_sms_verify.last.booking.id)
+      if @booking
+        @booking.order.update!(finished: false)
         redirect_to root_path
       end
     end
