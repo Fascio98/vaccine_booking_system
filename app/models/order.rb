@@ -6,13 +6,14 @@ class Order < ApplicationRecord
     self.order_code = order_next_code
   end
 
-  validates_presence_of :order_code
+  scope :finished,-> {where(finished: true).where('order_date >=?', DateTime.now)}
 
   def order_next_code
     ActiveRecord::Base.connection.select_one("SELECT nextval('order_code');")['nextval']
   end
 
-  def self.order_code(search)
+
+  def self.order_code_find(search)
     if search
       order_code = Order.find_by(order_code: search)
 
@@ -24,5 +25,4 @@ class Order < ApplicationRecord
     end
   end
 
-  scope :finished,-> {where(finished:true)}
 end

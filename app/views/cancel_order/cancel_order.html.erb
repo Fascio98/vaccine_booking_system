@@ -39,6 +39,7 @@
   <div class="card_body">
     <div class="row">
       <div class="col">
+      <div class="col">
         <% if @that_business_unit.present? %>
           <h1>Order Details</h1>
           <table class="table table-striped">
@@ -58,7 +59,7 @@
               <td class="align-middle"><%= @that_business_unit.country.name %></td>
               <td class="align-middle"><%= @that_business_unit.city.name %></td>
               <td class="align-middle"><%= @that_business_unit.district.name %></td>
-              <td class="align-middle"><%= @that_order.order_date %></td
+              <td class="align-middle"><%= @that_order.last.order_date %></td>
             </tr>
             </tbody>
           </table>

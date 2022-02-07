@@ -1,6 +1,6 @@
 <% if @that_sms_verify.nil? %>
   <div class="alert alert-danger" role="alert">
-    <%= @record1 %>
+    <%= @record %>
   </div>
 <% end %>
 
@@ -12,6 +12,23 @@
   </div>
 </div>
 
+<div class="card">
+  <div class="card-body">
+    <h1>Cancel Order </h1>
+    <%= form_tag cancel_order_finalize_path, :method => "post" do %>
+      <div class="row">
+        <%= label_tag(:verify_order_code) %>
+        <div class="col-1">
+          <%= text_field_tag :search_sms_message, params[:search_sms_message], presence: true%>
+        </div>
+      </div>
+      <% if @that_order.nil? %>
+        <%= flash[:notice] = 'Field Required' %>
+      <% end %>
+      <%= submit_tag "Cancel Order", :name => nil, class:'btn btn-primary'%>
+    <% end %>
+  </div>
+</div>
 
 
-<%= @that_order.id %>
+
