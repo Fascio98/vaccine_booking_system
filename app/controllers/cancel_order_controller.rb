@@ -1,38 +1,30 @@
 class CancelOrderController < ApplicationController
   #before_action :fetch_booking, only: %i[cancel_order]
-  attr_reader :that_order
+  before_action :init_service
 
   def cancel_order
-    @that_order = Order.order_code(params[:search_order]).finished.first
-    @that_patient = Patient.search_patient(params[:search_patient]).first
-
     if @that_order.patient.mobile_phone == @that_patient.mobile_phone
       @that_business_unit = BusinessUnit.find_by(id: @that_order.business_unit_slot&.business_unit&.id)
-      @booking = Booking.find_by(order_id: @that_order.id)
-      @result1 = result.call(booking)
-      @result = Web::DeleteStepService.new(current_user)
     end
   rescue => e
     @record = e.exception('Record Not Found')
   end
 
   def cancel_order_finalize
-    #@booking = Booking.find_by(order_id: @that_order.id)
-    @that_sms_verify=VerifySmsMessage.verify_order_message(params[:search_sms_message]).first
+    @booking = Booking.find_by(order_id: @that_order.id)
+    @sms = Web::DeleteOrderSmsService.new(@booking).call
+    SendOrderSmsVerifyWorker.perform_async(@sms.id)
+    @that_sms_verify=VerifySmsMessage.verify_order_message(params[:search_sms_message]).last
   rescue => e
     @record1 = e.exception('Record Not Found')
   end
 
   private
 
-  # def fetch_booking
-  #   booking_uuid = cookies.signed[:booking_uuid]
-  #
-  #
-  #   if booking_uuid.present?
-  #     @booking = Booking.find_by(guid: booking_uuid)
-  #   end
-  # end
+  def init_service
+    @that_order = Order.order_code(params[:search_order]).finished.last
+    @that_patient = Patient.search_patient(params[:search_patient]).last
+  end
 
   def order_params
     params.require(:order).permit(:id,:order_code, :search_order)
