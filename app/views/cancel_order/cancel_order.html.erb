@@ -7,7 +7,7 @@
 <div class="card">
   <div class="card-body">
     <h1>Cancel Order</h1>
-    <%= form_tag cancel_order_path, :method => "get" do %>
+    <%= form_tag cancel_order_path, :method => "post" do %>
       <div class="row">
         <%= label_tag(:order_code) %>
         <div class="col-1">

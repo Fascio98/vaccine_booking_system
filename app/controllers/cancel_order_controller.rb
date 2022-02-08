@@ -20,9 +20,8 @@ class CancelOrderController < ApplicationController
     @that_sms_verify=VerifySmsMessage.verify_order_message(params[:search_sms_message])
 
     if @that_sms_verify.present?
-      @booking = Booking.find_by(id: @that_sms_verify.last.booking.id)
-      if @booking
-        @booking.order.update!(finished: false)
+      if VerifySmsMessage.where(booking_id: @that_sms_verify.last.booking.id).last == @that_sms_verify.last
+        @that_sms_verify.last.booking.order.update!(finished: false)
         redirect_to root_path
       end
     end
@@ -32,14 +31,12 @@ class CancelOrderController < ApplicationController
     @record = 'Record Not Found'
   end
 
-
   private
-
 
   def init_service
     @that_order = Order.finished.order_code_find(params[:search_order])
     @that_patient = Patient.search_patient(params[:search_patient]).last
-  rescue => e
+  rescue
     catch_errors
   end
 
