@@ -1,5 +1,6 @@
 class CancelOrderController < ApplicationController
   before_action :init_service
+  before_action :catch_errors
 
   def cancel_order
     if @that_order.present?
@@ -10,8 +11,8 @@ class CancelOrderController < ApplicationController
         SendOrderSmsVerifyWorker.perform_async(@sms.id)
       end
     end
-  rescue => e
-    @record = e.exception('Record Not Found')
+  rescue
+    catch_errors
   end
 
   def cancel_order_finalize
@@ -25,18 +26,21 @@ class CancelOrderController < ApplicationController
         redirect_to root_path
       end
     end
-
-  rescue => e
-    @record = e.exception('Record Not Found')
   end
+
+  def catch_errors
+    @record = 'Record Not Found'
+  end
+
 
   private
 
+
   def init_service
-    @that_order = Order.order_code_find(params[:search_order]).finished
+    @that_order = Order.finished.order_code_find(params[:search_order])
     @that_patient = Patient.search_patient(params[:search_patient]).last
   rescue => e
-    @record = e.exception('Record Not Found')
+    catch_errors
   end
 
   def order_params

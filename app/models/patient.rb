@@ -12,7 +12,7 @@ class Patient < ApplicationRecord
         self.where(id: mobile_phone)
       end
     else
-      @that_patient= {  }
+      @that_patient = {}
     end
   end
 

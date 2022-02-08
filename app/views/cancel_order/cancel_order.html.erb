@@ -1,4 +1,4 @@
-<% if @that_order.nil? || @that_patient.nil? %>
+<% if @that_order.nil? && @that_patient.present? || @that_order.present? && @that_patient.nil? || @that_order.nil? && @that_patient.nil?  %>
   <div class="alert alert-danger" role="alert">
     <%= @record %>
   </div>
@@ -15,11 +15,6 @@
         </div>
 
       </div>
-      <% if @that_order.nil? %>
-        <%= flash[:notice] = 'Field Required' %>
-
-      <% end %>
-
       <div class="row">
         <%= label_tag(:phone_number) %>
         <div class="col-1">
@@ -27,9 +22,6 @@
         </div>
 
       </div>
-      <% if @that_patient.nil? %>
-        <%= flash[:notice] = 'Field Required' %>
-      <% end %>
       <%= submit_tag "Search", :name => nil, class:'btn btn-primary'%>
     <% end %>
   </div>
